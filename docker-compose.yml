@@ -49,6 +49,7 @@ services:
         - "80:80"
       environment:
         KOPF_ES_SERVERS: "elasticsearch:9200"
+        KOPF_SERVER_NAME: "kopf.dev"
       links:
         - elasticsearch
 
