@@ -1,7 +1,7 @@
 version: '2'
 services:
     elasticsearch:
-      image: elasticsearch:5
+      image: elasticsearch:5.1-alpine
       command: elasticsearch
       environment:
         # This helps ES out with memory usage
@@ -16,11 +16,10 @@ services:
         - "9300:9300"
 
     logstash:
-      image: logstash:5
+      image: logstash:5.1-alpine
       command: logstash --auto-reload -w 4 -f /etc/logstash/conf.d/logstash.conf
       environment:
-        # This helps Logstash out if it gets too busy
-        - LS_HEAP_SIZE=2048m
+        - LS_HEAP_SIZE=512m
       volumes:
         # volume mount the logstash config
         - ./logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
@@ -35,7 +34,7 @@ services:
         - elasticsearch
 
     kibana:
-      image: kibana:5
+      image: kibana:5.1
       environment:
         # Point Kibana to the elasticsearch container
         - ELASTICSEARCH_URL=http://elasticsearch:9200
