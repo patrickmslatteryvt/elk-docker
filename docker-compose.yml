@@ -46,7 +46,7 @@ services:
     kopf:
       image: rancher/kopf:v0.4.0
       ports:
-        - "8080:80"
+        - "80:80"
       environment:
         KOPF_ES_SERVERS: "elasticsearch:9200"
       links:
